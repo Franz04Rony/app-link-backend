@@ -1,9 +1,9 @@
 const choices = {
     color: {
         verde: '#18A773',
-        morado: '8D5DB1',
-        black: '000000',
-        white: 'ffff'
+        morado: '#8D5DB1',
+        black: '#000000',
+        white: '#ffff'
     }
 }
 

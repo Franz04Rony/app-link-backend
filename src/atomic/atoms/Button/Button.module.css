@@ -1,4 +1,5 @@
 .button{
-    background-color: blueviolet;
+    background-color: var(--color-secondary);
+    width: 100px;
 }
 

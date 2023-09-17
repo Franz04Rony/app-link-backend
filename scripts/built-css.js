@@ -27,7 +27,8 @@ function transformTokens(parentKey, object) {
 function buildTokens() {
     const transformedChoices = transformTokens(null, choices)
     const transformedDecisions = transformTokens(null, decisions)
-    const customProperties = `${transformedChoices}${transformedDecisions}`
+    // const customProperties = `${transformedChoices}${transformedDecisions}`
+    const customProperties = `${transformedDecisions}`
 
     const data = `:root {\n  ${cleanLines(customProperties)}\n}\n`
 

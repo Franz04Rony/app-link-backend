@@ -1,11 +1,6 @@
 :root {
-  --color-verde: #18A773;
-  --color-morado: 8D5DB1;
-  --color-black: 000000;
-  --color-white: ffff;
-
   --color-primary: #18A773;
-  --color-secondary: 8D5DB1;
-  --color-black: 000000;
-  --color-white: ffff;
+  --color-secondary: #8D5DB1;
+  --color-black: #000000;
+  --color-white: #ffff;
 }
