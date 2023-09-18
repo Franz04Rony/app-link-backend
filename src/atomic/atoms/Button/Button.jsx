@@ -1,9 +1,8 @@
 import s from './Button.module.css'
 import PropTypes from 'prop-types'
 
-export const Button = (
-    {label,
-    
+export const Button = ({
+    label,
 }) => {
     return (
         <button className = {s.button}>
