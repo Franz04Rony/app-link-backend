@@ -5,8 +5,9 @@ export const BoxLink = ({
     label,
     link,
 }) => {
+
     const handleClick = (link) => {
-        window.open(link)
+        window.open(link, '_blank')
     }
 
     return (
