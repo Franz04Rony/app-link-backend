@@ -5,49 +5,23 @@ import {PerfilPicture} from "../atomic/atoms/PerfilPicture/PerfilPicture"
 import { BoxLink } from "../atomic/molecules/BoxLink/BoxLink"
 import { Header } from "../atomic/molecules/Header/Header"
 
-import s from './Home.module.css'
+import { getUser } from "../API/getUser"
 
-const getData = async(id) =>{
-  const url = `http://127.0.0.1:3001/api/users/${id}`
-  const resp = await fetch(url)
-  const data = await resp.json()
-  return data
-}
-
-const  getImages = (id) => {
-  const [user, setUser] = useState([])
-  const [isLoading, setIsLoading] = useState(true)
-  const [links, setLinks] = useState([])
-
-  const getUser = async() => {
-    const newUser = await getData(id)
-    setUser(newUser)
-    setIsLoading(false)
-    setLinks(newUser.links) 
-  }
-  useEffect(()=>{
-    getUser()
-  }, [])
-
-  return {
-    user,
-    isLoading,
-    links
-  }
-}
+import s from './styles/Home.module.css'
 
 export const Home = ({
   perfil,
   menu
 }) => {
-  const {user, isLoading, links} = getImages('e500b68a-f703-4779-941b-3b2180b4b328')
-  console.log(links)
+  const {user, links} = getUser('daa11c07-c422-4d62-81a0-ff81fdbae3ab')
   
   return (
     <>
       <Header 
         profileName={user.name}
         src={user.perfilImage}
+        links={links}
+        userID={user.userID}
       />
       <div className={s.MainBox}>
         <div className={s.box}>

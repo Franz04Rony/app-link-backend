@@ -16,3 +16,8 @@
     width: 70px;    
 }
 
+.buttonGroup{
+    display: flex;
+    gap: 0.5rem;
+}
+

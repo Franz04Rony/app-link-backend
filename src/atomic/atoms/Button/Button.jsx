@@ -3,9 +3,13 @@ import PropTypes from 'prop-types'
 
 export const Button = ({
     label,
+    onClick
 }) => {
     return (
-        <button className = {s.button}>
+        <button 
+        	className = {s.button}
+			onClick = {onClick}
+        >
             {label}
         </button>
     )
@@ -17,6 +21,7 @@ Button.propTypes = {
 
 Button.defaultProps = {
     label: "boton",
+		onClick: ()=>{}
 }
 
 export default Button
