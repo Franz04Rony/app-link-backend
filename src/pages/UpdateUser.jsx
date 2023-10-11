@@ -13,7 +13,7 @@ export const UpdateUser = ({
     const {links, userID, profileName, src} = state
 
     const [data, setData] = useState({
-        image: "https://w0.peakpx.com/wallpaper/372/865/HD-wallpaper-kekkai-sensen-leo-leonardo-watch-thumbnail.jpg",
+        image: null,
         link: "",
         label: ""
     })
@@ -30,15 +30,24 @@ export const UpdateUser = ({
     }
 
     const handleClick = async(links, data, userID) => {
-      console.log(data)
-      console.log(links)
       const newLinks = [...links, data]
-      console.log(newLinks)
       patchData(`http://127.0.0.1:3001/api/users/${userID}`,{
         links: newLinks
       })
     }
 
+    const uploadImage = async(event) =>{
+      const formData = new FormData()
+      formData.append('file', event.target.files[0] )
+      const response = await fetch("http://127.0.0.1:3001/api/files/links", {
+        method: 'POST',
+        body: formData,
+    
+      })
+      const resp = await response.json()
+      const {secureUrl} = resp
+      setData({...data, image:secureUrl})
+    }
 
   return (
     <div>
@@ -56,9 +65,19 @@ export const UpdateUser = ({
           />
         </div>
         <div className={s.form}>
-          <div className={s.image}>
-            <img src={data.image} alt="nueva imagen" />
-          </div>
+
+            <label className={s.image}>
+              <img src={data.image ? data.image : "https://th.bing.com/th/id/OIG.s9mB6..wYYm1x1cRK3wA?pid=ImgGn"} alt="nueva imagen" />
+              {/* <img src="https://th.bing.com/th/id/OIG.s9mB6..wYYm1x1cRK3wA?pid=ImgGn" alt="nueva imagen" /> */}
+              <input 
+                type="file" 
+                name="upload-img" 
+                accept="image/*"
+                onChange={ uploadImage }
+              />
+            </label>
+
+
           <div className={s.newData}>
 
             <div className={s.inputBox}>

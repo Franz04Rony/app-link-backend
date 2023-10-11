@@ -20,7 +20,7 @@ export const Header = ({
     }
 
   return (
-    <div className={s.header}>
+    <nav className={s.header}>
         <div className={s.perfil}>
             <PerfilPicture 
                 src = {src}
@@ -41,7 +41,7 @@ export const Header = ({
                 onClick = {addNewLink}
             />
         </div>
-    </div>
+    </nav>
   )
 }
 
