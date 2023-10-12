@@ -19,14 +19,15 @@ export const UpdateUser = ({
     })
 
     const patchData = async(url = '', data = {}) => {
-      const response = await fetch(url, {
+      await fetch(url, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(data)
       })
-      return response.json()
+      setData({...data, image: null, link: "", label: ""})
+      // return response.json()
     }
 
     const handleClick = async(links, data, userID) => {
@@ -89,6 +90,7 @@ export const UpdateUser = ({
                 placeholder="https://example.com" 
                 className={s.input}
                 onChange={e => setData({...data, link: e.target.value })}
+                value={data.link}
                 />
             </div>
 
@@ -96,11 +98,12 @@ export const UpdateUser = ({
               <input 
                 type="text" 
                 autoComplete="off" 
-                minLength="0" 
+                minLength="0"  
                 maxLength="1023" 
                 placeholder="Ejemplo de título"
                 className={s.input}
-                onChange={e => setData({...data, label: e.target.value })}
+                onChange={e =>setData({...data, label: e.target.value })}
+                value={data.label}
                 />
             </div>
 

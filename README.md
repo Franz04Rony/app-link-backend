@@ -4,7 +4,8 @@
 - [x] Home page
 - [x] add new link page
 - [x] receive user data from backend
-- [x] send an patch method adding a new link
+- [x] send a patch method adding a new link
 - [ ] login page
-- [ ] upload images
+- [x] upload images to backend.
 - [ ] order links by creation date
+- [ ] Code refactoring. 
