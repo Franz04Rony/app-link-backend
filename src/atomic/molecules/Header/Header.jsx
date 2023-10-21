@@ -5,42 +5,74 @@ import s from './Header.module.css'
 import { useNavigate } from 'react-router-dom'
 
 export const Header = ({
-    profileName,
-    src,
     links,
-    userID
+    user,
+    isAuthorized
 }) => {
     const navigate = useNavigate()
 
     const addNewLink = () => {
-        navigate("/update", { state: {links, userID, profileName, src} })
+        navigate("/update", { state: {links, user} })
     }
     const returnHome = () => {
-        navigate("/")
+        navigate("/home", {state: {links, user}})
+    }
+
+    const GoRegister = () => {
+        navigate("/register")
+    }
+
+    const GoLogin = () => {
+        navigate("/login")
     }
 
   return (
     <nav className={s.header}>
         <div className={s.perfil}>
-            <PerfilPicture 
-                src = {src}
-            />
-            <div>
-                {profileName}
-            </div>
+        {
+            isAuthorized ?
+            <>
+                <PerfilPicture 
+                    src = {user.perfilImage}
+                />
+                <div>
+                    {user.name}
+                </div>
+            </>
+            :
+            <h1 style={{fontSize:20+'px'}}> LinkApp</h1>
+        }
+            
         </div>
-
         <div className={s.buttonGroup}>
-            <Button 
-                label = 'Home'
-                onClick = {returnHome}
-            />
+        {
+            isAuthorized ? 
+            <>
+                <Button 
+                    label = 'Home'
+                    onClick = {returnHome}
+                    />
 
-            <Button
-                label = 'Add new link'
-                onClick = {addNewLink}
-            />
+                <Button
+                    label = 'Add new link'
+                    onClick = {addNewLink}
+                />
+            </>
+            :
+            <>
+                <Button 
+                    label = 'Register'
+                    onClick = {GoRegister}
+                    />
+
+                <Button
+                    label = 'Login'
+                    onClick = {GoLogin}
+                />
+            </>
+        }
         </div>
+        
     </nav>
   )
 }

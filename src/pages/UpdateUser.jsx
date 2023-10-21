@@ -10,7 +10,7 @@ export const UpdateUser = ({
 }) => {
   
     const {state} = useLocation()
-    const {links, userID, profileName, src} = state
+    const {links, user} = state
 
     const [data, setData] = useState({
         image: null,
@@ -53,8 +53,9 @@ export const UpdateUser = ({
   return (
     <div>
       <Header
-        profileName={profileName}
-        src={src}
+        user={user}
+        links={links}
+        isAuthorized={true}
       />
       <div className={s.box}>
         <div className={s.header}>
@@ -62,7 +63,7 @@ export const UpdateUser = ({
           <h1 className={s.title}> Add a new link </h1>
           <Button
             label="add"
-            onClick={() => handleClick(links,data, userID)} 
+            onClick={() => handleClick(links,data, user.userID)} 
           />
         </div>
         <div className={s.form}>
