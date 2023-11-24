@@ -16,8 +16,7 @@ export const Home = ({
   
 }) => {
 
-  const {state} = useLocation()
-  const {user, links} = getUser(state.user.userID)
+  const {user, links} = getUser(localStorage.getItem("jwt"))
 
   const [isAuthorized, setIsAuthorized] = useState(true)
 

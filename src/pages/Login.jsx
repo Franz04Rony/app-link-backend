@@ -1,7 +1,8 @@
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Button from '../atomic/atoms/Button/Button'
 import s from './styles/Login.module.css'
 import { useState } from 'react'
+import { Welcome } from './Welcome'
 
 export const Login = () => {
 
@@ -15,7 +16,9 @@ export const Login = () => {
         name: "",
         password: ""
     })
+    const [error, setError] = useState("")
 
+    // todo: poner postData en un archivo a parte y solo importarlo
     const postData = async(url = '', data = {}) => {
         const response = await fetch(url, {
             method: 'POST',
@@ -28,14 +31,19 @@ export const Login = () => {
     }
 
     const handleLogin = async(data) => {
-        const response = await postData('http://127.0.0.1:3001/api/users/login',{
+        const response = await postData(`http://127.0.0.1:3001/api/users/login`,{
             name: data.name,
             password: data.password
         })
-        const datos = await response.json()
-        const {token, links} = datos
-        localStorage.setItem('jwtToken', token)
-        navigate("/home", { state: {user: datos, links} })
+        data = await response.json()
+
+        if(response.status != 201){
+            setError(data.message)
+        }
+        else{
+            localStorage.setItem('jwt', data.token)
+            navigate("/home")
+        }
       }
 
   return (
@@ -73,6 +81,7 @@ export const Login = () => {
                         onChange={ e =>setData({...data, password: e.target.value})}
                     />
                 </div>
+                <p>{error}</p>
 
                 <div className={s.buttonBox}>
                     <Button

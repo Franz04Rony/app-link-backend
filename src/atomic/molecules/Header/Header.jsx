@@ -12,10 +12,10 @@ export const Header = ({
     const navigate = useNavigate()
 
     const addNewLink = () => {
-        navigate("/update", { state: {links, user} })
+        navigate("/update")
     }
     const returnHome = () => {
-        navigate("/home", {state: {links, user}})
+        navigate("/home")
     }
 
     const GoRegister = () => {

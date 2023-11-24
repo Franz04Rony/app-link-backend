@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import Button from '../atomic/atoms/Button/Button'
 import s from './styles/Register.module.css'
+import { useState } from 'react'
 
 export const Register = () => {
 
@@ -8,6 +9,36 @@ export const Register = () => {
 
     const goWelcome = () => {
         navigate("/welcome")
+    }
+
+    const [user, setUser] = useState({
+        name: "",
+        perfilImage: "https://c4.wallpaperflare.com/wallpaper/269/887/661/anime-dr-stone-senku-ishigami-hd-wallpaper-preview.jpg",
+        password: ""
+    })
+
+    // todo: poner postData en un archivo a parte y solo importarlo
+    const postData = async(url = '', data = {}) => {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+              },
+            body: JSON.stringify(data)
+        })
+        return response
+    }
+
+    const handleRegister = async(user) => {
+        try {
+            await postData("http://127.0.0.1:3001/api/users/register", {
+                name: user.name,
+                perfilImage: user.perfilImage,
+                password: user.password,
+            })
+            navigate("/welcome")
+        }
+        catch (error){ console.log(error) }
     }
 
   return (
@@ -27,6 +58,8 @@ export const Register = () => {
                         maxLength="1023" 
                         placeholder="MyCoolNickName" 
                         className={s.input}
+                        value={user.name}
+                        onChange={ e => setUser({...user, name: e.target.value})}
                     />
                 </div>
                 <div>
@@ -39,6 +72,8 @@ export const Register = () => {
                         maxLength="1023" 
                         placeholder="MyPassword123" 
                         className={s.input}
+                        value={user.password}
+                        onChange={ e => setUser({...user, password: e.target.value})}
                     />
                 </div>
 
@@ -61,6 +96,7 @@ export const Register = () => {
                     />
                     <Button
                         label="Registrar"
+                        onClick={e => handleRegister(user)}
                     />
                 </div>
             </div>

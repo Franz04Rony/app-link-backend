@@ -3,14 +3,13 @@ import Button from "../atomic/atoms/Button/Button"
 import { Header } from "../atomic/molecules/Header/Header"
 import s from './styles/UpdateUser.module.css'
 import { useLocation } from "react-router-dom"
-
+import { getUser } from "../API/getUser"
 
 export const UpdateUser = ({
   
 }) => {
   
-    const {state} = useLocation()
-    const {links, user} = state
+    const {user, links} = getUser(localStorage.getItem("jwt"))
 
     const [data, setData] = useState({
         image: null,
